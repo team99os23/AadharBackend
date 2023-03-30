@@ -23,16 +23,19 @@ const create_aadhaar = async (req, res) => {
                 console.log(result3)
             })
             .catch((err)=>{
-                console.log(err)
+                console.log(err);
+                res.status(500).json({ message: err.message });
             })
         }
     })
 }
 
 const get_details = async (req, res) => {
+    console.log(req.body.AadhaarNumber);
     Aadhaar.find({AadhaarNumber: req.body.AadhaarNumber})
     .then((results)=>{
-        if (results) {
+        console.log(results);
+        if (results && results.length) {
             results.map((result) => {
                 const resultdecode = {
                     AadhaarNumber: req.body.AadhaarNumber,
@@ -46,11 +49,13 @@ const get_details = async (req, res) => {
                 res.send(resultdecode);
             })
         }
-        else res.send("Could not find User");
+        else {
+            throw Error("Could not find user!");
+        }
     })
     .catch(err => {
-        res.send(err);
         console.log(err);
+        res.status(500).json({ message: err.message });
     }) 
 }
 
@@ -66,11 +71,13 @@ const authenticate_aadhaar = async (req, res) => {
             }
         })
         if(found == false){
-            res.send("No such user available");
+            console.log("No such error available!");
+            throw Error("No such user available");
         }
     })
     .catch((err)=>{
-        res.send(err);
+        console.log(err);
+        res.status(500).json({ message: err.message });
     })
 }
 

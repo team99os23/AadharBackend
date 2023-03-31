@@ -16,7 +16,7 @@ For **POST** /aadhaar/create
 For POST /aadhaar/details
 ```python
 {
-    "AadhaarNumber":"1234567890211213",
+    "AadhaarNumber":"1234567890211213"
 }
 ```
 

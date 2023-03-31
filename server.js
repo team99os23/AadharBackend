@@ -13,7 +13,7 @@ const dbURI = process.env.MONGODB_URI;
 
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 .then((result)=>{
-    app.listen(3001);
+    app.listen(3001,"0.0.0.0");
     console.log("Server Running On Port 3001");
 })
 .catch((err)=>{
